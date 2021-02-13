@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# PROVIDE: whatsmyip
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name=whatsmyip
+rcvar=whatsmyip_enable
+
+command="/usr/sbin/daemon"
+command_args="-S -u whatsmyip -r -f -p /var/run/whatsmyip.pid /usr/local/bin/whatsmyip"
+load_rc_config $name
+
+#
+# DO NOT CHANGE THESE DEFAULT VALUES HERE
+# SET THEM IN THE /etc/rc.conf FILE
+#
+whatsmyip_enable=${whatsmyip_enable-"NO"}
+pidfile=${whatsmyip_pidfile-"/var/run/whatsmyip.pid"}
+
+run_rc_command "$1"
